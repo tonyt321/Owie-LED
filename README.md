@@ -3,9 +3,11 @@
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/lolwheel/Owie)
 
 Working on adding RGBW led control to change the color of the pint front and tail lights (on boot only as to not interfear with owie)
-todo fix rgbw color settings saving
-change color of whole led strip
-make front and tail strips indepenant 
+
+todo -- 
+-- fix rgbw color settings saving
+-- change color of whole led strip
+-- make front and tail strips indepenant 
 
 
 
