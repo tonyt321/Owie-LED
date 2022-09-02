@@ -13,4 +13,14 @@ message SettingsMsg {
   bool is_locked = 9; // if the board is actively locked/parked
   bool locking_enabled = 10; // if the board locking functionality is enabled ('armed')
   reserved 11;
+  int32 redf = 12;
+  int32 greenf = 13;
+  int32 bluef = 14;
+  int32 whitef = 15;
+  int32 ledf = 16;
+  int32 ap_self_redt = 17;
+  int32 ap_self_greent = 18;
+  int32 ap_self_bluet = 19;
+  int32 ap_self_whitet = 20;
+  int32 ap_self_ledt = 21;
 }
