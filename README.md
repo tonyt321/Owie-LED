@@ -2,6 +2,13 @@
 
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/lolwheel/Owie)
 
+Working on adding RGBW led control to change the color of the pint front and tail lights (on boot only as to not interfear with owie)
+todo fix rgbw color settings saving
+change color of whole led strip
+make front and tail strips indepenant 
+
+
+
 This project is unlocks battery expansion possibilities on otherwise
 locked Onewheels, adds WiFi-based monitoring of various battery health signals such as individual cell voltages, current, etc.
 
