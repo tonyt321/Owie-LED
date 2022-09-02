@@ -13,6 +13,8 @@
 #include "settings.h"
 #include "task_queue.h"
 
+#include <Adafruit_NeoPixel.h>
+
 namespace {
 DNSServer dnsServer;
 AsyncWebServer webServer(80);
@@ -212,6 +214,36 @@ String templateProcessor(const String &var) {
       opts.concat("</option>");
     }
     return opts;
+  } else if (var == "c") {
+    return String(Settings->redf,
+                  /* decimalPlaces = */ 2);
+  } else if (var == "AP_GREENF") {
+    return String(Settings->greenf,
+                  /* decimalPlaces = */ 2);
+  } else if (var == "AP_BLUEF") {
+    return String(Settings->bluef,
+                  /* decimalPlaces = */ 2);
+  } else if (var == "AP_WHITEF") {
+    return String(Settings->whitef,
+                  /* decimalPlaces = */ 2);
+  } else if (var == "AP_LEDF") {
+    return String(Settings->ledf,
+                  /* decimalPlaces = */ 2);
+  } else if (var == "AP_REDT") {
+    return String(Settings->ap_self_redt,
+                  /* decimalPlaces = */ 2);
+  } else if (var == "AP_BLUET") {
+    return String(Settings->ap_self_greent,
+                  /* decimalPlaces = */ 2);
+  } else if (var == "AP_GREENT") {
+    return String(Settings->ap_self_bluet,
+                  /* decimalPlaces = */ 2);
+  } else if (var == "AP_WHITET") {
+    return String(Settings->ap_self_whitet,
+                  /* decimalPlaces = */ 2);
+  } else if (var == "AP_LEDT") {
+    return String(Settings->ap_self_ledt,
+                  /* decimalPlaces = */ 2);
   }
   return "<script>alert('UNKNOWN PLACEHOLDER')</script>";
 }
@@ -219,6 +251,17 @@ String templateProcessor(const String &var) {
 }  // namespace
 
 void setupWifi() {
+	
+	///////////////////change RGBW color on startup
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Adafruit_NeoPixel strip(16, 13, NEO_GRBW + NEO_KHZ800); // number of leds   led pin 12 tail light
+  strip.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
+ //strip.setPixelColor(1, strip.Color(100,100,0,10));
+  strip.setPixelColor(1, strip.Color(Settings->greenf, Settings->redf, Settings->bluef, Settings->whitef));
+  strip.show();            // update
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
   WiFi.setOutputPower(Settings->wifi_power);
   bool stationMode = (strlen(Settings->ap_name) > 0);
   WiFi.mode(stationMode ? WIFI_AP_STA : WIFI_AP);
@@ -312,6 +355,17 @@ void setupWebServer(BmsRelay *bmsRelay) {
         const auto apSelfPassword = request->getParam("pw", true);
         const auto apSelfName = request->getParam("apselfname", true);
         const auto wifiPower = request->getParam("wifipower", true);
+        const auto apSelfRedf = request->getParam("redf", true);
+        const auto apSelfGreenf = request->getParam("greenf", true);
+        const auto apSelfBluef = request->getParam("bluef", true);
+        const auto apSelfWhitef = request->getParam("whitef", true);
+        const auto apSelfLedf = request->getParam("ledt", true);
+        const auto apSelfRedt = request->getParam("redt", true);
+        const auto apSelfGreent = request->getParam("greent", true);
+        const auto apSelfBluet = request->getParam("bluet", true);
+        const auto apSelfWhitet = request->getParam("whitet", true);
+        const auto apSelfLedt = request->getParam("ledt", true);
+
         if (apSelfPassword == nullptr ||
             apSelfPassword->value().length() >
                 sizeof(Settings->ap_self_password) ||
@@ -346,6 +400,164 @@ void setupWebServer(BmsRelay *bmsRelay) {
                  "%s", apSelfPassword->value().c_str());
         snprintf(Settings->ap_self_name, sizeof(Settings->ap_self_name), "%s",
                  apSelfName->value().c_str());
+        saveSettingsAndRestartSoon();
+        request->send(200, "text/html", "Settings saved, restarting...");
+        return;
+// Set Red Front
+        if (apSelfRedf == nullptr || apSelfRedf->value().toInt() <= 0 ||
+            apSelfRedf->value().toInt() >= 255) {
+          request->send(
+              400, "text/html",
+              "Color value MUST be between 0 and 255.");
+          return;
+        }
+        Settings->redf = apSelfRedf->value().toInt();
+      //  snprintf(Settings->redf, sizeof(apSelfRedf),
+      //           "%s", apSelfRedf->value().c_str());
+        saveSettingsAndRestartSoon();
+        request->send(200, "text/html", "Settings saved, restarting...");
+        return;
+
+        // Set Green Front
+        if (apSelfGreenf == nullptr || apSelfGreenf->value().toInt() <= 0 ||
+            apSelfGreenf->value().toInt() >= 255) {
+          request->send(
+              400, "text/html",
+              "Color value MUST be between 0 and 255.");
+          return;
+        }
+        Settings->greenf = apSelfGreenf->value().toInt();
+      //  snprintf(Settings->greenf, sizeof(Settings->greenf),
+      //           "%s", apSelfGreenf->value().c_str());
+        saveSettingsAndRestartSoon();
+        request->send(200, "text/html", "Settings saved, restarting...");
+        return;
+      
+        // Set Blue Front
+        if (apSelfBluef == nullptr || apSelfBluef->value().toInt() <= 0 ||
+            apSelfBluef->value().toInt() >= 255) {
+          request->send(
+              400, "text/html",
+              "Color value MUST be between 0 and 255.");
+          return;
+        }
+        Settings->bluef = apSelfBluef->value().toInt();
+      //  snprintf(Settings->bluef, sizeof(Settings->bluef),
+       //          "%s", apSelfBluef->value().c_str());
+        saveSettingsAndRestartSoon();
+        request->send(200, "text/html", "Settings saved, restarting...");
+        return;
+
+        // Set White Front
+        if (apSelfWhitef == nullptr || apSelfWhitef->value().toInt() <= 0 ||
+            apSelfWhitef->value().toInt() >= 255) {
+          request->send(
+              400, "text/html",
+              "Color value MUST be between 0 and 255.");
+          return;
+        }
+        Settings->whitef = apSelfWhitef->value().toInt();
+     //   snprintf(Settings->whitef, sizeof(Settings->whitef),
+     //            "%s", apSelfWhitef->value().c_str());
+        saveSettingsAndRestartSoon();
+        request->send(200, "text/html", "Settings saved, restarting...");
+        return;
+
+        
+        // Set LED Front
+        if (apSelfLedf == nullptr || apSelfLedf->value().toInt() <= 1 ||
+            apSelfLedf->value().toInt() >= 15) {
+          request->send(
+              400, "text/html",
+              "Number of LEDs MUST be between 1 and 15.");
+          return;
+        }
+        Settings->ledf = apSelfLedf->value().toInt();
+     //   snprintf(Settings->ledf, sizeof(Settings->ledf),
+     //            "%s", apSelfLedf->value().c_str());
+             snprintf(Settings->ledf, sizeof(Settings->ledf), "%s",
+                 apSelfledf->value().c_str());
+        saveSettingsAndRestartSoon();
+        request->send(200, "text/html", "Settings saved, restarting...");
+        return;
+
+        // Set Red Tail
+        if (apSelfRedt == nullptr || apSelfRedt->value().toInt() <= 0 ||
+            apSelfRedt->value().toInt() >= 255) {
+          request->send(
+              400, "text/html",
+              "Color value MUST be between 0 and 255.");
+          return;
+        }
+        Settings->ap_self_redt = apSelfRedt->value().toInt();
+        snprintf(Settings->ap_self_password, sizeof(Settings->ap_self_password),
+                 "%s", apSelfPassword->value().c_str());
+        snprintf(Settings->ap_self_name, sizeof(Settings->ap_self_name), "%s",
+                 apSelfName->value().c_str());
+        saveSettingsAndRestartSoon();
+        request->send(200, "text/html", "Settings saved, restarting...");
+        return;
+
+        // Set Green Tail
+        if (apSelfGreent == nullptr || apSelfGreent->value().toInt() <= 0 ||
+            apSelfGreent->value().toInt() >= 255) {
+          request->send(
+              400, "text/html",
+              "Color value MUST be between 0 and 255.");
+          return;
+        }
+        Settings->ap_self_greent = apSelfGreent->value().toInt();
+        snprintf(Settings->ap_self_password, sizeof(Settings->ap_self_password),
+                 "%s", apSelfPassword->value().c_str());
+        snprintf(Settings->ap_self_name, sizeof(Settings->ap_self_name), "%s",
+                 apSelfName->value().c_str());
+        saveSettingsAndRestartSoon();
+        request->send(200, "text/html", "Settings saved, restarting...");
+        return;
+
+        // Set Blue Tail
+        if (apSelfBluet == nullptr || apSelfBluet->value().toInt() <= 0 ||
+            apSelfBluet->value().toInt() >= 255) {
+          request->send(
+              400, "text/html",
+              "Color value MUST be between 0 and 255.");
+          return;
+        }
+        Settings->ap_self_bluet = apSelfBluet->value().toInt();
+        snprintf(Settings->ap_self_password, sizeof(Settings->ap_self_password),
+                 "%s", apSelfPassword->value().c_str());
+        snprintf(Settings->ap_self_name, sizeof(Settings->ap_self_name), "%s",
+                 apSelfName->value().c_str());
+        saveSettingsAndRestartSoon();
+        request->send(200, "text/html", "Settings saved, restarting...");
+        return;
+
+        // Set White Tail
+        if (apSelfWhitet == nullptr || apSelfWhitet->value().toInt() <= 0 ||
+            apSelfWhitet->value().toInt() >= 255) {
+          request->send(
+              400, "text/html",
+              "Color value MUST be between 0 and 255.");
+          return;
+        }
+        Settings->ap_self_whitet = apSelfWhitet->value().toInt();
+        snprintf(Settings->ap_self_password, sizeof(Settings->ap_self_password),
+                 "%s", apSelfPassword->value().c_str());
+        snprintf(Settings->ap_self_name, sizeof(Settings->ap_self_name), "%s",
+                 apSelfName->value().c_str());
+        saveSettingsAndRestartSoon();
+        request->send(200, "text/html", "Settings saved, restarting...");
+        return;
+
+        // Set LED Tail
+        if (apSelfLedt == nullptr || apSelfLedt->value().toInt() <= 1 ||
+            apSelfLedt->value().toInt() >= 15) {
+          request->send(
+              400, "text/html",
+              "Number of LEDs MUST be between 1 and 15.");
+          return;
+        }
+        Settings->ap_self_ledt = apSelfLedt->value().toInt();
         saveSettingsAndRestartSoon();
         request->send(200, "text/html", "Settings saved, restarting...");
         return;
