@@ -27,6 +27,23 @@
           </select>
       </fieldset>
       <fieldset>
+        <legend>RGBW Settings:</legend>
+        <p>Front Lights:<br>
+            <input style="width: 60px" placeholder="RED" value="%AP_REDF%" name="redf">
+            <input style="width: 60px" placeholder="GREEN" value="%AP_GREENF%" name="greenf">
+            <input style="width: 60px" placeholder="BLUE" value="%AP_BLUEF%" name="bluef">
+            <input style="width: 60px" placeholder="WHITE" value="%AP_WHITEF%" name="whitef">
+            <input style="width: 60px" placeholder="# LED" value="%AP_LEDF%" name="ledf">
+        </p>
+        <p>Tails Lights:<br>
+            <input style="width: 60px" placeholder="RED" value="%AP_REDT%" name="redt">
+            <input style="width: 60px" placeholder="GREEN" value="%AP_GREENT%" name="greent">
+            <input style="width: 60px" placeholder="BLUE" value="%AP_BLUET%" name="bluet">
+            <input style="width: 60px" placeholder="WHITE" value="%AP_WHITET%" name="whitet">
+            <input style="width: 60px" placeholder="# LED" value="%AP_LEDT%" name="ledt">
+        </p>
+      </fieldset>
+      <fieldset>
         <legend>Board locking:</legend>
         <p id="lockingMsg"></p>
         <button onclick="toggleArming(this)" id="armBtn" style="display:none" data-canenable="%CAN_ENABLE_LOCKING%"
