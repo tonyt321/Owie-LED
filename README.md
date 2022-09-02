@@ -38,6 +38,7 @@ This is a hobby projet for its contributors and comes with absolutely no guarant
   - For the PINT you require a somewhat exotic Torx 5 point security bit, size TS20. [Amazon link](https://www.amazon.com/gp/product/B07TC79LVH)
   - For the XR+ you will need a 3/32" Allen key. [Amazon link](https://www.amazon.com/dp/B0000CBJE1)
 - Wemos D1 Mini Lite - the cheapest and most compact ESP8266 board that I'm aware of. You can find those on Aliexpress and Amazon. Buy version without the metal shield or ceramic WiFi antenna on it as they're too bulky to fit inside of the battery enclosure. [5 pack Amazon Link](https://www.amazon.com/dp/B081PX9YFV).
+pre-flashed no cut version https://avaspark.com/product/gumstick/
 
 ## Flashing Owie for the first time
 
