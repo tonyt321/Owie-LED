@@ -1,6 +1,6 @@
 # Owie
 
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/lolwheel/Owie)
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/tonyt321/Owie-LED)
 
 Working on adding RGBW led control to change the color of the pint front and tail lights (on boot only as to not interfear with owie)
 
