@@ -2,13 +2,3 @@ SettingsMsg.ap_name max_size:31
 SettingsMsg.ap_password max_size:31
 SettingsMsg.ap_self_password max_size:31
 SettingsMsg.ap_self_name max_size:31
-SettingsMsg.redf max_size:3
-SettingsMsg.greenf max_size:3
-SettingsMsg.bluef max_size:3
-SettingsMsg.whitef max_size:3
-SettingsMsg.ledf max_size:3
-SettingsMsg.ap_self_redt max_size:3
-SettingsMsg.ap_self_greent max_size:3
-SettingsMsg.ap_self_bluet max_size:3
-SettingsMsg.ap_self_whitet max_size:3
-SettingsMsg.ap_self_ledt max_size:3

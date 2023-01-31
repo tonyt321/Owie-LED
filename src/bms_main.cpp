@@ -71,6 +71,5 @@ void bms_setup() {
   relay->setBMSSerialOverride(0xFFABCDEF);
 
   setupWifi();
-  setupWebServer(relay);
   TaskQueue.postRecurringTask([]() { relay->loop(); });
 }
