@@ -109,13 +109,13 @@ String generateOwieStatusJson() {
   }
 
   status["TOTAL_VOLTAGE"] =
-      String(relay->getTotalVoltageMillivolts() / 1000.0, 2) + "v";
-  status["CURRENT_AMPS"] = String(relay->getCurrentInAmps(), 1) + " Amps";
-  status["BMS_SOC"] = String(relay->getBmsReportedSOC()) + "%";
-  status["OVERRIDDEN_SOC"] = String(relay->getOverriddenSOC()) + "%";
-  status["USED_CHARGE_MAH"] = String(relay->getUsedChargeMah()) + " mAh";
+      String(relay->getTotalVoltageMillivolts() / 1000.0, 2);
+  status["CURRENT_AMPS"] = String(relay->getCurrentInAmps(), 1);
+  status["BMS_SOC"] = String(relay->getBmsReportedSOC());
+  status["OVERRIDDEN_SOC"] = String(relay->getOverriddenSOC());
+  status["USED_CHARGE_MAH"] = String(relay->getUsedChargeMah());
   status["REGENERATED_CHARGE_MAH"] =
-      String(relay->getRegeneratedChargeMah()) + " mAh";
+      String(relay->getRegeneratedChargeMah());
   status["UPTIME"] = uptimeString();
   status["CELL_VOLTAGE_TABLE"] = out;
   status["TEMPERATURE_TABLE"] = getTempString();
