@@ -15,7 +15,8 @@
 #include "task_queue.h"
 
 
-#include "SparkFun_Qwiic_Humidity_AHT20.h" //Click here to get the library: http://librarymanager/All#Qwiic_Humidity_AHT20 by SparkFun
+#include <SparkFun_Qwiic_Humidity_AHT20.h> //Click here to get the library: http://librarymanager/All#Qwiic_Humidity_AHT20 by SparkFun
+#include <wire.h>
 AHT20 humiditySensor;
 
 int owie_temperature = -100;
