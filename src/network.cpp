@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include "network.h"
 
 #include <DNSServer.h>
@@ -12,6 +13,13 @@
 #include "data.h"
 #include "settings.h"
 #include "task_queue.h"
+
+
+#include "SparkFun_Qwiic_Humidity_AHT20.h" //Click here to get the library: http://librarymanager/All#Qwiic_Humidity_AHT20 by SparkFun
+AHT20 humiditySensor;
+
+int owie_temperature = -100;
+int humidity = -100;
 
 namespace {
 DNSServer dnsServer;
@@ -218,7 +226,20 @@ String templateProcessor(const String &var) {
 
 }  // namespace
 
+
+
 void setupWifi() {
+
+
+  
+  if (humiditySensor.available() == true)
+  {
+    //Get the new temperature and humidity value
+    float owie_temperature = humiditySensor.getTemperature();
+    float humidity = humiditySensor.getHumidity();
+
+  }
+  
   WiFi.setOutputPower(Settings->wifi_power);
   bool stationMode = (strlen(Settings->ap_name) > 0);
   WiFi.mode(stationMode ? WIFI_AP_STA : WIFI_AP);

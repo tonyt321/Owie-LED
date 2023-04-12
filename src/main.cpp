@@ -1,11 +1,12 @@
 #include <Arduino.h>
-
 #include "ESP8266WiFi.h"
 #include "bms_main.h"
 #include "dprint.h"
 #include "recovery.h"
 #include "settings.h"
 #include "task_queue.h"
+#include "Wire.h"
+#include "Wire.cpp"
 
 void resetQuickPowerCycleCount() {
   Settings->quick_power_cycle_count = 0;
@@ -49,7 +50,13 @@ void maybeLockOnStartup() {
   }
 }
 
+
+
 extern "C" void setup() {
+
+
+
+  
   WiFi.persistent(false);
   loadSettings();
   // It is important to do this *BEFORE* calling isInRecoveryMode()
